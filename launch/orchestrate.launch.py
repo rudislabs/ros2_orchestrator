@@ -118,39 +118,39 @@ def generate_launch_description():
     if ROS2Nodes is not None:
         for ROS2Node in ROS2Nodes:
             node = ROS2Nodes[ROS2Node]
-                if "remappings" in node:
-                    remappings = [eval(str(node["remappings"]))]
-                    if "arguments" in node:
-                        runNode = Node(package=node["package"],
-                            executable=node["executable"],
-                            name=str(node["name"]), 
-                            output=node["output"],
-                            arguments=node["arguments"],
-                            parameters=node["parameters"],
-                            remappings=remappings)
-                    else:
-                        runNode = Node(package=node["package"],
-                            executable=node["executable"],
-                            name=str(node["name"]), 
-                            output=node["output"],
-                            parameters=node["parameters"],
-                            remappings=remappings)
+            if "remappings" in node:
+                remappings = [eval(str(node["remappings"]))]
+                if "arguments" in node:
+                    runNode = Node(package=node["package"],
+                        executable=node["executable"],
+                        name=str(node["name"]), 
+                        output=node["output"],
+                        arguments=node["arguments"],
+                        parameters=node["parameters"],
+                        remappings=remappings)
                 else:
-                    if "arguments" in node:
-                        runNode = Node(package=node["package"],
-                            executable=node["executable"],
-                            name=str(node["name"]), 
-                            output=node["output"],
-                            arguments=node["arguments"],
-                            parameters=node["parameters"])
-                    else:
-                        runNode = Node(package=node["package"],
-                            executable=node["executable"],
-                            name=str(node["name"]), 
-                            output=node["output"],
-                            parameters=node["parameters"])
+                    runNode = Node(package=node["package"],
+                        executable=node["executable"],
+                        name=str(node["name"]), 
+                        output=node["output"],
+                        parameters=node["parameters"],
+                        remappings=remappings)
+            else:
+                if "arguments" in node:
+                    runNode = Node(package=node["package"],
+                        executable=node["executable"],
+                        name=str(node["name"]), 
+                        output=node["output"],
+                        arguments=node["arguments"],
+                        parameters=node["parameters"])
+                else:
+                    runNode = Node(package=node["package"],
+                        executable=node["executable"],
+                        name=str(node["name"]), 
+                        output=node["output"],
+                        parameters=node["parameters"])
 
-                ld.add_action(runNode)
+            ld.add_action(runNode)
 
     ####################################################################################
 
