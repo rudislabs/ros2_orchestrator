@@ -26,7 +26,17 @@
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
-			}
+			},
+			"ros2Repo_3":{
+                                "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
+                                "version": "main",
+                                "build": {
+                                        "package": "nxp_tf_lite",
+                                        "prefix": "--packages-select",
+                                        "postfix": "--symlink-install"
+                                }
+                        }
+
 		}
 	},
 	"nodes": {
@@ -50,10 +60,23 @@
 			"output": "screen",
 			"parameters": [	{"start_delay": 7.0},
 							{"camera_vector_topic": "/cupcar0/PixyVector"},
-							{"linear_velocity": 1.3},
-							{"angular_velocity": -4.0},
-							{"single_line_steer_scale": 0.6}
+							{"linear_velocity": 0.0},
+							{"angular_velocity": 0.0},
+							{"single_line_steer_scale": 0.0}
 						]
-		}
+		},
+                "ros2Node_2":{
+                        "package": "nxp_tf_lite",
+                        "executable": "nxp_tf_lite",
+                        "name": "nxp_tf_lite",
+                        "output": "screen",
+                        "parameters": [ {"model_file": "/usr/bin/tensorflow-lite-2.6.0/examples/mobilenet_v1_1.0_224_quant.tflite"},
+                                                        {"camera_image": "/NPU/image_raw"},
+                                                        {"topic_name": "testTFLite"},
+                                                        {"max_returns": 3},
+                                                        {"threshold": 0.3}
+
+                                                ]
+                }
 	}
 }
