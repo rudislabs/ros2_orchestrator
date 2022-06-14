@@ -1,82 +1,17 @@
 {	"setup":{
 		"ros2": {
 			"ros2Repo_0":{
-				"repo": "git@github.com:rudislabs/nxp_cup_interfaces.git",
-				"version": "aim",
+				"repo": "git@github.com:rudislabs/canfd_msgs.git",
+				"version": "humble",
 				"build": {
-					"package": "nxp_cup_interfaces",
+					"package": "canfd_msgs",
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
-			},
-			"ros2Repo_1":{
-				"repo": "git@github.com:rudislabs/nxp_cup_vision.git",
-				"version": "aim_ign",
-				"build": {
-					"package": "nxp_cup_vision",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			},
-			"ros2Repo_2":{
-				"repo": "git@github.com:rudislabs/aim_line_follow.git",
-				"version": "aim_ign",
-				"build": {
-					"package": "aim_line_follow",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			},
-			"ros2Repo_3":{
-                                "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
-                                "version": "main",
-                                "build": {
-                                        "package": "nxp_tf_lite",
-                                        "prefix": "--packages-select",
-                                        "postfix": "--symlink-install"
-                                }
-                        }
+			}
 
 		}
 	},
 	"nodes": {
-		"ros2Node_0":{
-			"package": "nxp_cup_vision",
-			"executable": "nxp_track_vision",
-			"name": "nxp_track_vision_0",
-			"output": "screen",
-			"parameters": [	{"pyramid_down": 0},
-							{"camera_image": "CMUcam5"},
-							{"debug_image": "debugImage0"},
-							{"namespace": "cupcar0"},
-							{"mask_ratio_array": [1.0, 0.4]}
-
-						]
-		},
-		"ros2Node_1":{
-			"package": "aim_line_follow",
-			"executable": "aim_line_follow",
-			"name": "line_follower_0",
-			"output": "screen",
-			"parameters": [	{"start_delay": 7.0},
-							{"camera_vector_topic": "/cupcar0/PixyVector"},
-							{"linear_velocity": 0.0},
-							{"angular_velocity": 0.0},
-							{"single_line_steer_scale": 0.0}
-						]
-		},
-                "ros2Node_2":{
-                        "package": "nxp_tf_lite",
-                        "executable": "nxp_tf_lite",
-                        "name": "nxp_tf_lite",
-                        "output": "screen",
-                        "parameters": [ {"model_file": "/usr/bin/tensorflow-lite-2.6.0/examples/mobilenet_v1_1.0_224_quant.tflite"},
-                                                        {"camera_image": "/NPU/image_raw"},
-                                                        {"topic_name": "testTFLite"},
-                                                        {"max_returns": 3},
-                                                        {"threshold": 0.3}
-
-                                                ]
-                }
 	}
 }
