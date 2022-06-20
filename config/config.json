@@ -1,17 +1,27 @@
 {	"setup":{
 		"ros2": {
 			"ros2Repo_0":{
-				"repo": "git@github.com:rudislabs/canfd_msgs.git",
-				"version": "humble",
-				"build": {
-					"package": "canfd_msgs",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			}
-
+                                "repo": "git@github.com:rudislabs/nxp_cv_cam.git",
+                                "version": "humble",
+                                "build": {
+                                        "package": "nxp_cv_cam",
+                                        "prefix": "--packages-select",
+                                        "postfix": "--symlink-install"
+                                }
+                        }
 		}
 	},
 	"nodes": {
+		"ros2Node_0":{
+			"package": "nxp_cv_cam",
+			"executable": "nxp_cv_cam_node",
+			"name": "nxp_cv_cam_node_0",
+			"output": "screen",
+			"parameters": [	{"camera_topic": "/NPU/image_raw"},
+							{"device": "/dev/video3"},
+							{"framerate": 30},
+							{"resolution": [640, 480]}
+						]
+		}
 	}
 }
