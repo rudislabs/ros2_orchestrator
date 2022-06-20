@@ -105,7 +105,7 @@ if setupROS2 is not None:
         os.system('/bin/bash {:s}/install/setup.bash'.format(workSpaceROS2))
         os.system("/bin/bash /opt/ros/galactic/setup.bash")
         print('''\n\n\nPLEASE RUN:\n 
-            source {:s}/install/setup.bash; source /opt/ros/galactic/setup.bash; ros2 launch sim_ignition_bringup sim_ignition.launch.py
+            source {:s}/install/setup.bash; ros2 launch ros2_orchestrator orchestrate.launch.py
             \n\n'''.format(workSpaceROS2))
         sys.exit()
 

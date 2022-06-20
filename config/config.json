@@ -1,10 +1,28 @@
 {	"setup":{
 		"ros2": {
 			"ros2Repo_0":{
+                                "repo": "git@github.com:rudislabs/tflite_msgs.git",
+                                "version": "humble",
+                                "build": {
+                                        "package": "tflite_msgs",
+                                        "prefix": "--packages-select",
+                                        "postfix": "--symlink-install"
+                                }
+                        },
+			"ros2Repo_1":{
                                 "repo": "git@github.com:rudislabs/nxp_cv_cam.git",
                                 "version": "humble",
                                 "build": {
                                         "package": "nxp_cv_cam",
+                                        "prefix": "--packages-select",
+                                        "postfix": "--symlink-install"
+                                }
+                        },
+			"ros2Repo_2":{
+                                "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
+                                "version": "main",
+                                "build": {
+                                        "package": "nxp_tf_lite",
                                         "prefix": "--packages-select",
                                         "postfix": "--symlink-install"
                                 }
@@ -22,6 +40,23 @@
 							{"framerate": 30},
 							{"resolution": [640, 480]}
 						]
-		}
+		},
+		"ros2Node_1":{
+                        "package": "nxp_tf_lite",
+                        "executable": "nxp_tf_lite",
+                        "name": "nxp_tf_lite_0",
+                        "output": "screen",
+                        "parameters": [ {"camera_image": "/NPU/image_raw"},
+                                                        {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
+                                                        {"label_file": "coco.txt"},
+                                                        {"ext_delegate": "/usr/lib/libvx_delegate.so"},
+							{"ext_delegate_options": ""},
+                                                        {"topic_name": "TFLite"},
+                                                        {"gpu_inference": false},
+							{"bbox_index": 0},
+                                                        {"score_index": 2},
+                                                        {"class_index": 1}
+                                                ]
+                }
 	}
 }
