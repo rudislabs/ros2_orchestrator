@@ -10,6 +10,15 @@
                                 }
                         },
 			"ros2Repo_1":{
+				"repo": "git@github.com:rudislabs/canfd_msgs.git",
+				"version": "humble",
+				"build": {
+					"package": "canfd_msgs",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_2":{
                                 "repo": "git@github.com:rudislabs/nxp_cv_cam.git",
                                 "version": "humble",
                                 "build": {
@@ -18,15 +27,25 @@
                                         "postfix": "--symlink-install"
                                 }
                         },
-			"ros2Repo_2":{
+			"ros2Repo_3":{
                                 "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
-                                "version": "main",
+                                "version": "humble",
                                 "build": {
                                         "package": "nxp_tf_lite",
                                         "prefix": "--packages-select",
                                         "postfix": "--symlink-install"
                                 }
+                        },
+                        "ros2Repo_4":{
+                                "repo": "git@github.com:rudislabs/ucans32k1_spi_led.git",
+                                "version": "humble",
+                                "build": {
+                                        "package": "ucans32k1_spi_led",
+                                        "prefix": "--packages-select",
+                                        "postfix": "--symlink-install"
+                                }
                         }
+
 		}
 	},
 	"nodes": {
@@ -43,8 +62,8 @@
 		},
 		"ros2Node_1":{
                         "package": "nxp_tf_lite",
-                        "executable": "nxp_tf_lite",
-                        "name": "nxp_tf_lite_0",
+                        "executable": "nxp_tf_lite_node",
+                        "name": "nxp_tf_lite_node_0",
                         "output": "screen",
                         "parameters": [ {"camera_image": "/NPU/image_raw"},
                                                         {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
@@ -54,6 +73,23 @@
                                                         {"topic_name": "TFLite"},
                                                         {"gpu_inference": false},
 							{"bbox_index": 0},
+                                                        {"score_index": 2},
+                                                        {"class_index": 1}
+                                                ]
+                },
+		"ros2Node_2":{
+                        "package": "ucans32k1_spi_led",
+                        "executable": "ucans32k1_spi_led_node",
+                        "name": "ucans32k1_spi_led_node_0",
+                        "output": "screen",
+                        "parameters": [ {"camera_image": "/NPU/image_raw"},
+                                                        {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
+                                                        {"label_file": "coco.txt"},
+                                                        {"ext_delegate": "/usr/lib/libvx_delegate.so"},
+                                                        {"ext_delegate_options": ""},
+                                                        {"topic_name": "TFLite"},
+                                                        {"gpu_inference": false},
+                                                        {"bbox_index": 0},
                                                         {"score_index": 2},
                                                         {"class_index": 1}
                                                 ]
