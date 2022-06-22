@@ -65,12 +65,14 @@
                         "executable": "nxp_tf_lite_node",
                         "name": "nxp_tf_lite_node_0",
                         "output": "screen",
-                        "parameters": [ {"camera_image": "/NPU/image_raw"},
+                        "parameters": [ {"camera_image_0": "/NPU/image_raw"},
+                                        {"camera_image_1": "/NPU/image_sim"},
                                                         {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
                                                         {"label_file": "coco.txt"},
                                                         {"ext_delegate": "/usr/lib/libvx_delegate.so"},
 							{"ext_delegate_options": ""},
-                                                        {"topic_name": "TFLite"},
+                                                        {"topic_name_0": "TFLiteReal"},
+                                                        {"topic_name_1": "TFLiteSim"},
                                                         {"gpu_inference": false},
 							{"bbox_index": 0},
                                                         {"score_index": 2},
@@ -82,17 +84,7 @@
                         "executable": "ucans32k1_spi_led_node",
                         "name": "ucans32k1_spi_led_node_0",
                         "output": "screen",
-                        "parameters": [ {"camera_image": "/NPU/image_raw"},
-                                                        {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
-                                                        {"label_file": "coco.txt"},
-                                                        {"ext_delegate": "/usr/lib/libvx_delegate.so"},
-                                                        {"ext_delegate_options": ""},
-                                                        {"topic_name": "TFLite"},
-                                                        {"gpu_inference": false},
-                                                        {"bbox_index": 0},
-                                                        {"score_index": 2},
-                                                        {"class_index": 1}
-                                                ]
+                        "parameters": []
                 }
 	}
 }
