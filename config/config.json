@@ -54,9 +54,9 @@
 			"executable": "nxp_cv_cam_node",
 			"name": "nxp_cv_cam_node_0",
 			"output": "screen",
-			"parameters": [	{"camera_topic": "/NPU/image_raw"},
+			"parameters": [	{"camera_topic": "/NPU/image_real"},
 							{"device": "/dev/video3"},
-							{"framerate": 30},
+							{"framerate": 15},
 							{"resolution": [640, 480]}
 						]
 		},
@@ -65,7 +65,7 @@
                         "executable": "nxp_tf_lite_node",
                         "name": "nxp_tf_lite_node_0",
                         "output": "screen",
-                        "parameters": [ {"camera_image_0": "/NPU/image_raw"},
+                        "parameters": [ {"camera_image_0": "/NPU/image_real"},
                                         {"camera_image_1": "/NPU/image_sim"},
                                                         {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
                                                         {"label_file": "coco.txt"},
