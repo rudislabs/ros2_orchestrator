@@ -84,7 +84,7 @@
                         "executable": "ucans32k1_spi_led_node",
                         "name": "ucans32k1_spi_led_node_0",
                         "output": "screen",
-                        "parameters": []
+                        "parameters": [{"led_brightness": 1}]
                 }
 	}
 }
