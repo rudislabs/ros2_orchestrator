@@ -29,7 +29,7 @@
                         },
 			"ros2Repo_3":{
                                 "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
-                                "version": "humble",
+                                "version": "dev",
                                 "build": {
                                         "package": "nxp_tf_lite",
                                         "prefix": "--packages-select",
