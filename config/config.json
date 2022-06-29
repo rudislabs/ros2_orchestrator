@@ -53,6 +53,24 @@
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
+			},
+			"ros2Repo_6":{
+				"repo": "git@github.com:rudislabs/nxp_demo_control.git",
+				"version": "humble",
+				"build": {
+					"package": "nxp_demo_control",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_7":{
+				"repo": "git@github.com:rudislabs/nxp_light_control.git",
+				"version": "humble",
+				"build": {
+					"package": "nxp_light_control",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
 			}
 		}
 	},
@@ -104,6 +122,31 @@
 							{"camera_image": "/NPU/image_sim"},
 							{"linear_velocity": 1.25},
 							{"debug": false}]
+		},
+		"ros2Node_4":{
+			"package": "nxp_light_control",
+			"executable": "nxp_light_control_node",
+			"name": "nxp_light_control_0",
+			"output": "screen",
+			"parameters": [{"led_pattern_topic": "/led_pattern"},
+							{"cmd_topic": "/cmd_vel"},
+							{"tflite_topic_0": "/TFLiteSim"},
+							{"tflite_topic_1": "/TFLiteReal"},
+							{"threshold_0": 0.3},
+							{"threshold_1": 0.5},
+							{"blink_delay": 0.3}]
+		},
+		"ros2Node_5":{
+			"package": "nxp_demo_control",
+			"executable": "nxp_demo_control_node",
+			"name": "nxp_demo_control_0",
+			"output": "screen",
+			"parameters": [{"cmd_input_topic": "/requested_vel"},
+							{"cmd_output_topic": "/cmd_vel"},
+							{"tflite_topic_0": "/TFLiteSim"},
+							{"tflite_topic_1": "/TFLiteReal"},
+							{"threshold_0": 0.3},
+							{"threshold_1": 0.5}]
 		}
 	}
 }
