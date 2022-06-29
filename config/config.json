@@ -44,8 +44,16 @@
                                         "prefix": "--packages-select",
                                         "postfix": "--symlink-install"
                                 }
-                        }
-
+                        },
+			"ros2Repo_5":{
+				"repo": "git@github.com:rudislabs/nxp_cup_vision.git",
+				"version": "aim_ign",
+				"build": {
+					"package": "nxp_cup_vision",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			}
 		}
 	},
 	"nodes": {
@@ -85,6 +93,17 @@
                         "name": "ucans32k1_spi_led_node_0",
                         "output": "screen",
                         "parameters": [{"led_brightness": 1}]
-                }
+                },
+		"ros2Node_3":{
+			"package": "nxp_cup_vision",
+			"executable": "nxp_track_vision",
+			"name": "nxp_cup_vision_node_sim",
+			"output": "screen",
+			"parameters": [{"debug_image": "/DebugCupSim"},
+							{"cmd_topic": "/requested_vel"},
+							{"camera_image": "/NPU/image_sim"},
+							{"linear_velocity": 1.25},
+							{"debug": false}]
+		}
 	}
 }
