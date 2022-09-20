@@ -41,7 +41,7 @@
 							{"resolution": [640, 480]}
 						]
 		},
-		"ros2Node_0":{
+		"ros2Node_1":{
 			"package": "nxp_cv_cam",
 			"executable": "nxp_cv_cam_node",
 			"name": "nxp_cv_cam_node_csi2",
@@ -52,7 +52,7 @@
 							{"resolution": [640, 480]}
 						]
 		},
-		"ros2Node_1":{
+		"ros2Node_3":{
                         "package": "nxp_tf_lite",
                         "executable": "nxp_tf_lite_node",
                         "name": "nxp_tf_lite_node_0",
