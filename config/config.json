@@ -10,15 +10,6 @@
                                 }
                         },
 			"ros2Repo_1":{
-				"repo": "git@github.com:rudislabs/canfd_msgs.git",
-				"version": "humble",
-				"build": {
-					"package": "canfd_msgs",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			},
-			"ros2Repo_2":{
                                 "repo": "git@github.com:rudislabs/nxp_cv_cam.git",
                                 "version": "humble",
                                 "build": {
@@ -27,7 +18,7 @@
                                         "postfix": "--symlink-install"
                                 }
                         },
-			"ros2Repo_3":{
+			"ros2Repo_2":{
                                 "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
                                 "version": "dev",
                                 "build": {
@@ -35,53 +26,28 @@
                                         "prefix": "--packages-select",
                                         "postfix": "--symlink-install"
                                 }
-                        },
-                        "ros2Repo_4":{
-                                "repo": "git@github.com:rudislabs/ucans32k1_spi_led.git",
-                                "version": "humble",
-                                "build": {
-                                        "package": "ucans32k1_spi_led",
-                                        "prefix": "--packages-select",
-                                        "postfix": "--symlink-install"
-                                }
-                        },
-			"ros2Repo_5":{
-				"repo": "git@github.com:rudislabs/nxp_cup_vision.git",
-				"version": "aim_ign",
-				"build": {
-					"package": "nxp_cup_vision",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			},
-			"ros2Repo_6":{
-				"repo": "git@github.com:rudislabs/nxp_demo_control.git",
-				"version": "humble",
-				"build": {
-					"package": "nxp_demo_control",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			},
-			"ros2Repo_7":{
-				"repo": "git@github.com:rudislabs/nxp_light_control.git",
-				"version": "humble",
-				"build": {
-					"package": "nxp_light_control",
-					"prefix": "--packages-select",
-					"postfix": "--symlink-install"
-				}
-			}
+                        }
 		}
 	},
 	"nodes": {
 		"ros2Node_0":{
 			"package": "nxp_cv_cam",
 			"executable": "nxp_cv_cam_node",
-			"name": "nxp_cv_cam_node_0",
+			"name": "nxp_cv_cam_node_csi1",
 			"output": "screen",
-			"parameters": [	{"camera_topic": "/NPU/image_real"},
+			"parameters": [	{"camera_topic": "/CSI1/image_raw"},
 							{"device": "/dev/video3"},
+							{"framerate": 15},
+							{"resolution": [640, 480]}
+						]
+		},
+		"ros2Node_0":{
+			"package": "nxp_cv_cam",
+			"executable": "nxp_cv_cam_node",
+			"name": "nxp_cv_cam_node_csi2",
+			"output": "screen",
+			"parameters": [	{"camera_topic": "/CSI2/image_raw"},
+							{"device": "/dev/video4"},
 							{"framerate": 15},
 							{"resolution": [640, 480]}
 						]
@@ -91,62 +57,19 @@
                         "executable": "nxp_tf_lite_node",
                         "name": "nxp_tf_lite_node_0",
                         "output": "screen",
-                        "parameters": [ {"camera_image_0": "/NPU/image_real"},
-                                        {"camera_image_1": "/NPU/image_sim"},
+                        "parameters": [ {"camera_image_0": "/CSI1/image_raw"},
+                                        {"camera_image_1": "/CSI2/image_raw"},
                                                         {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
                                                         {"label_file": "coco.txt"},
                                                         {"ext_delegate": "/usr/lib/libvx_delegate.so"},
 							{"ext_delegate_options": ""},
-                                                        {"topic_name_0": "TFLiteReal"},
-                                                        {"topic_name_1": "TFLiteSim"},
+                                                        {"topic_name_0": "/CSI1/TFLite"},
+                                                        {"topic_name_1": "/CSI2/TFLite"},
                                                         {"gpu_inference": false},
 							{"bbox_index": 0},
                                                         {"score_index": 2},
                                                         {"class_index": 1}
                                                 ]
-                },
-		"ros2Node_2":{
-                        "package": "ucans32k1_spi_led",
-                        "executable": "ucans32k1_spi_led_node",
-                        "name": "ucans32k1_spi_led_node_0",
-                        "output": "screen",
-                        "parameters": [{"led_brightness": 1}]
-                },
-		"ros2Node_3":{
-			"package": "nxp_cup_vision",
-			"executable": "nxp_track_vision",
-			"name": "nxp_cup_vision_node_sim",
-			"output": "screen",
-			"parameters": [{"debug_image": "/DebugCupSim"},
-							{"cmd_topic": "/requested_vel"},
-							{"camera_image": "/NPU/image_sim"},
-							{"linear_velocity": 1.25},
-							{"debug": false}]
-		},
-		"ros2Node_4":{
-			"package": "nxp_light_control",
-			"executable": "nxp_light_control_node",
-			"name": "nxp_light_control_0",
-			"output": "screen",
-			"parameters": [{"led_pattern_topic": "/led_pattern"},
-							{"cmd_topic": "/cmd_vel"},
-							{"tflite_topic_0": "/TFLiteSim"},
-							{"tflite_topic_1": "/TFLiteReal"},
-							{"threshold_0": 0.3},
-							{"threshold_1": 0.5},
-							{"blink_delay": 0.3}]
-		},
-		"ros2Node_5":{
-			"package": "nxp_demo_control",
-			"executable": "nxp_demo_control_node",
-			"name": "nxp_demo_control_0",
-			"output": "screen",
-			"parameters": [{"cmd_input_topic": "/requested_vel"},
-							{"cmd_output_topic": "/cmd_vel"},
-							{"tflite_topic_0": "/TFLiteSim"},
-							{"tflite_topic_1": "/TFLiteReal"},
-							{"threshold_0": 0.3},
-							{"threshold_1": 0.5}]
-		}
+                }
 	}
 }
