@@ -10,19 +10,10 @@
                                 }
                         },
                         "ros2Repo_1":{
-                                "repo": "git@github.com:rudislabs/nxp_cv_cam.git",
+                                "repo": "git@github.com:rudislabs/debug_image_tf_lite.git",
                                 "version": "humble",
                                 "build": {
-                                        "package": "nxp_cv_cam",
-                                        "prefix": "--packages-select",
-                                        "postfix": "--symlink-install"
-                                }
-                        },
-                        "ros2Repo_2":{
-                                "repo": "git@github.com:rudislabs/nxp_tf_lite.git",
-                                "version": "humble",
-                                "build": {
-                                        "package": "nxp_tf_lite",
+                                        "package": "debug_image_tf_lite",
                                         "prefix": "--packages-select",
                                         "postfix": "--symlink-install"
                                 }
@@ -31,30 +22,23 @@
         },
         "nodes": {
                 "ros2Node_0":{
-                        "package": "nxp_cv_cam",
-                        "executable": "nxp_cv_cam_node",
-                        "name": "nxp_cv_cam_node_csi2",
+                        "package": "debug_image_tf_lite",
+                        "executable": "debug_image_tf_lite_node",
+                        "name": "debug_image_tf_lite_node_real",
                         "output": "screen",
-                        "parameters": [ {"camera_topic": "/CSI2/image_raw"},
-                                                {"device": "/dev/video4"},
-                                                {"framerate": 15},
-                                                {"resolution": [640, 480]} ]
+                        "parameters": [{"debug_topic": "/CSI2/image_tf"},
+                                                        {"tflite_topic": "/CSI2/TFLite"},
+                                                        {"image_topic": "/CSI2/image_raw"},
+                                                        {"threshold": 0.55},
+                                                        {"max_returns": 5},
+                                                        {"max_queue": 30}]
                 },
                 "ros2Node_1":{
-                        "package": "nxp_tf_lite",
-                        "executable": "nxp_tf_lite_node",
-                        "name": "nxp_tf_lite_node_0",
+                        "package": "rqt_image_view",
+                        "executable": "rqt_image_view",
+                        "name": "rqt_image_view_0",
                         "output": "screen",
-                        "parameters": [ {"camera_image": "/CSI2/image_raw"},
-                                                {"model_file": "mobilenet_ssd_v2_coco_quant_postprocess.tflite"},
-                                                {"label_file": "coco.txt"},
-                                                {"ext_delegate": "/usr/lib/libvx_delegate.so"},
-                                                {"ext_delegate_options": ""},
-                                                {"topic_name": "/CSI2/TFLite"},
-                                                {"gpu_inference": false},
-                                                {"bbox_index": 0},
-                                                {"score_index": 2},
-                                                {"class_index": 1} ]
+                        "parameters": []
                 }
         }
 }
