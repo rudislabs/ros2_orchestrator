@@ -1,28 +1,64 @@
 {	"setup":{
 		"ros2": {
 			"ros2Repo_0":{
-				"repo": "git@github.com:rudislabs/nxp_cup_interfaces.git",
-				"version": "aim",
+				"repo": "git@github.com:rudislabs/canfd_msgs.git",
+				"version": "humble",
 				"build": {
-					"package": "nxp_cup_interfaces",
+					"package": "canfd_msgs",
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
 			},
 			"ros2Repo_1":{
-				"repo": "git@github.com:rudislabs/nxp_cup_vision.git",
-				"version": "aim_ign",
+				"repo": "git@github.com:rudislabs/opencyphal_led.git",
+				"version": "main",
 				"build": {
-					"package": "nxp_cup_vision",
+					"package": "opencyphal_led",
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
 			},
 			"ros2Repo_2":{
-				"repo": "git@github.com:rudislabs/aim_line_follow.git",
-				"version": "aim_ign",
+				"repo": "git@github.com:rudislabs/opencyphal_send.git",
+				"version": "main",
 				"build": {
-					"package": "aim_line_follow",
+					"package": "opencyphal_send",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_3":{
+				"repo": "git@github.com:rudislabs/actuator_msgs.git",
+				"version": "main",
+				"build": {
+					"package": "actuator_msgs",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_4":{
+				"repo": "git@github.com:cognipilot/vesc_can_control.git",
+				"version": "main",
+				"build": {
+					"package": "vesc_can_control",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_5":{
+				"repo": "git@github.com:cognipilot/can_send.git",
+				"version": "main",
+				"build": {
+					"package": "can_send",
+					"prefix": "--packages-select",
+					"postfix": "--symlink-install"
+				}
+			},
+			"ros2Repo_6":{
+				"repo": "git@github.com:cognipilot/joy_test_mixer_actuators.git",
+				"version": "main",
+				"build": {
+					"package": "joy_test_mixer_actuators",
 					"prefix": "--packages-select",
 					"postfix": "--symlink-install"
 				}
@@ -31,29 +67,58 @@
 	},
 	"nodes": {
 		"ros2Node_0":{
-			"package": "nxp_cup_vision",
-			"executable": "nxp_track_vision",
-			"name": "nxp_track_vision_0",
+			"package": "opencyphal_led",
+			"executable": "opencyphal_led_node",
+			"name": "opencyphal_led_node_0",
 			"output": "screen",
-			"parameters": [	{"pyramid_down": 0},
-							{"camera_image": "CMUcam5"},
-							{"debug_image": "debugImage0"},
-							{"namespace": "cupcar0"},
-							{"mask_ratio_array": [1.0, 0.4]}
-
-						]
+			"parameters": [{"led_brightness": 5},
+					{"led_image_topic": "/led_image"},
+					{"joy_topic": "/joy"},
+					{"cyphal_topic": "/CyphalTransmitFrame"},
+					{"max_leds": 12}]
 		},
 		"ros2Node_1":{
-			"package": "aim_line_follow",
-			"executable": "aim_line_follow",
-			"name": "line_follower_0",
+			"package": "opencyphal_send",
+			"executable": "opencyphal_send_node",
+			"name": "opencyphal_send_0",
 			"output": "screen",
-			"parameters": [	{"start_delay": 7.0},
-							{"camera_vector_topic": "/cupcar0/PixyVector"},
-							{"linear_velocity": 1.3},
-							{"angular_velocity": -4.0},
-							{"single_line_steer_scale": 0.6}
-						]
+			"parameters": [{"cyphal_input_topic": "/CyphalTransmitFrame"},
+					{"can_channel": "can1"}]
+		},
+		"ros2Node_2":{
+			"package": "vesc_can_control",
+			"executable": "vesc_can_control_node",
+			"name": "vesc_can_control_node0",
+			"output": "screen",
+			"parameters": [ {"actuators_input_topic": "/actuators"},
+					{"can_output_topic": "/can0_send"},
+					{"number_vesc": 4},
+					{"actuators_index_can": [0, 1, 2, 3]},
+					{"actuators_pole_pair": [15, 15, 15, 15]},
+					{"can_node_id_actuators": [119, 85, 73, 23]} ]
+		},
+		"ros2Node_3":{
+			"package": "can_send",
+			"executable": "can_send_node",
+			"name": "can_send_node0",
+			"output": "screen",
+			"parameters": [ {"can_channel": "can0"},
+					{"can_input_topic": "/can0_send"} ]
+		},
+		"ros2Node_4":{
+			"package": "joy_test_mixer_actuators",
+			"executable": "joy_test_mixer_actuators_node",
+			"name": "joy_test_mixer_actuators_node_0",
+			"output": "screen",
+			"parameters": [ {"joy_scale": 100},
+					{"joy_input_topic": "/joy"},
+					{"actuators_output_topic": "/actuators"},
+					{"thrust_axes": 1},
+					{"yaw_axes": 3},
+					{"arm_button": 7},
+					{"disarm_button": 6},
+					{"mix_thrust": [1.0, 1.0, 1.0, 1.0]},
+					{"mix_yaw": [-1.0, 1.0, 1.0, -1.0]} ]
 		}
 	}
 }
